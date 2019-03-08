@@ -42,10 +42,16 @@
 			"patterns": [
 				{
 					"name": "entity.inf",
-					"match": "\\b\\[(.*)\\]\\b",
+					"match": "(\\[)(\\S+?)(\\])",
 					"captures": {
 						"1": {
+							"name": "punctuation.definition.string.begin.inf"
+						},
+						"2": {
 							"name": "keyword.inf"
+						},
+						"3": {
+							"name": "punctuation.definition.string.end.inf"
 						}
 					}
 				}

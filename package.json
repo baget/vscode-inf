@@ -1,0 +1,28 @@
+{
+    "name": "inf",
+    "displayName": "Windows INF files",
+    "description": "Windows Driver INF files support",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "files.associations": {
+            "*.inf": "inf"
+        },
+        "languages": [{
+            "id": "inf",
+            "aliases": ["inf", "inf"],
+            "extensions": [".inf"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "inf",
+            "scopeName": "source.inf",
+            "path": "./syntaxes/inf.tmLanguage.json"
+        }]
+    }
+}

@@ -1,0 +1,92 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "inf",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#stringName"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#sections"
+		},
+		{
+			"include": "#statements"
+		}
+	],
+	"repository": {
+		"statements": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.inf",
+					"match": "(.*)(=)(.*)",
+					"captures": {
+						"1": {
+							"name": "variable.name.inf"
+						},
+						"2": {
+							"name": "punctuation.separator.inf"
+						},
+						"3": {
+							"name": "constant.character.inf"
+						}
+					}
+				}
+			]
+		},
+		"sections": {
+			"patterns": [
+				{
+					"name": "entity.inf",
+					"match": "\\b\\[(.*)\\]\\b",
+					"captures": {
+						"1": {
+							"name": "keyword.inf"
+						}
+					}
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.inf",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"include": "#stringcontent"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.inf",
+					"match": "(;).*$\\n?"
+				}
+			]
+		},
+		"stringName": {
+			"name": "string.quoted.other.inf",
+			"begin": "%",
+			"end": "%",
+			"patterns": [
+				{
+					"include": "#stringcontent"
+				}
+			]
+		},
+		"stringcontent": {
+			"patterns": [
+				{
+					"match": "(?x)                # turn on extended mode\n  \\\\                # a literal backslash\n  (?:               # ...followed by...\n    [\"\\\\/bfnrt]     # one of these characters\n    |               # ...or...\n    u               # a u\n    [0-9a-fA-F]{4}) # and four hex digits",
+					"name": "constant.character.escape.inf"
+				}
+			]
+		}
+	},
+	"scopeName": "source.inf"
+}

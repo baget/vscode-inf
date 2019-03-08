@@ -3,6 +3,10 @@
     "displayName": "Windows INF files",
     "description": "Windows Driver INF files support",
     "version": "0.0.1",
+    "publisher": "baget",
+    "author": {
+        "name": "baget"
+    },    
     "engines": {
         "vscode": "^1.32.0"
     },
@@ -24,5 +28,10 @@
             "scopeName": "source.inf",
             "path": "./syntaxes/inf.tmLanguage.json"
         }]
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/baget/vscode-inf.git"
+    },
+    "homepage": "https://github.com/baget/vscode-inf/blob/master/README.md"
 }

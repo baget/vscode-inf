@@ -15,8 +15,10 @@ steps:
     versionSpec: '8.x'
 
 - script: npm install
+  displayName: 'Install npm'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: npm install -g vsce
+  displayName: 'Install vsce'
+
+- script: vsce package
+  displayName: 'Generate .vsix'

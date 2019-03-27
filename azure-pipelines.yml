@@ -23,8 +23,6 @@ steps:
 - script: vsce package
   displayName: 'Generate .vsix'
 
-- script: vsce login baget
-
 - script: vsce publish patch
   displayName: 'publish .vsix'
 

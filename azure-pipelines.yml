@@ -23,6 +23,9 @@ steps:
 - script: vsce package
   displayName: 'Generate .vsix'
 
+- script: vsce publish patch
+  displayName: 'publish .vsix'
+
 - task: CopyFiles@2
   inputs:
     contents: '**/*.vsix'

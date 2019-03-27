@@ -41,4 +41,4 @@ steps:
     tagSource: manual
     tag: $(Build.BuildNumber)      
     assets: |
-         $(Build.ArtifactStagingDirectory)/*.zip
+         $(Build.ArtifactStagingDirectory)/*.vsix

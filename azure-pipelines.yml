@@ -35,10 +35,12 @@ steps:
 
 - task: GithubRelease@0 
   displayName: 'Create GitHub Release'      
+  #condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/release-v')
   inputs:
     gitHubConnection: baget
     repositoryName: baget/vscode-inf    
     tagSource: manual
-    tag: $(Build.BuildNumber)      
+    tag: $(Build.BuildNumber)
+    title: vscode-inf v$(Build.BuildNumber)
     assets: |
          $(Build.ArtifactStagingDirectory)/*.vsix

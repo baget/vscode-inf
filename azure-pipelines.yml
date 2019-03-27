@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: NodeTool@0 
+  inputs:
+    versionSpec: '8.x'
+
+- script: npm install
+  displayName: 'Install npm'
+
+- script: npm install -g vsce
+  displayName: 'Install vsce'
+
+- script: vsce package
+  displayName: 'Generate .vsix'
+
+# - script: vsce publish patch
+#   displayName: 'publish .vsix'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.vsix'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: vscode-inf
+
+- task: GithubRelease@0 
+  displayName: 'Create GitHub Release'      
+  #condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/release-v')
+  inputs:
+    gitHubConnection: baget
+    repositoryName: baget/vscode-inf    
+    tagSource: manual
+    tag: $(Build.BuildNumber)
+    title: vscode-inf v$(Build.BuildNumber)
+    assets: |
+         $(Build.ArtifactStagingDirectory)/*.vsix

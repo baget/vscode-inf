@@ -23,9 +23,12 @@ steps:
 - script: vsce package
   displayName: 'Generate .vsix'
 
-- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.vsix'
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: vscode-inf

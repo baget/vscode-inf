@@ -36,7 +36,6 @@ steps:
 - task: GithubRelease@0 
   displayName: 'Create GitHub Release'      
   inputs:
-    githubConnection: baget
     repositoryName: baget/vscode-inf
     tagSource: manual
     tag: $(Build.BuildNumber)      

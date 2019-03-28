@@ -22,7 +22,7 @@ steps:
 
 # Version JSON File
 # Description - Applies a version to a named field in a JSON File
-- task: VersionJSONFile@0
+- task: VersionJSONFile@1
   inputs: 
      # Required arguments
      Path: $(Build.SourcesDirectory)

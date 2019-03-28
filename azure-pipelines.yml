@@ -20,6 +20,20 @@ steps:
 - script: npm install -g vsce
   displayName: 'Install vsce'
 
+# Version JSON File
+# Description - Applies a version to a named field in a JSON File
+- task: VersionJSONFile
+  inputs: 
+     # Required arguments
+     Path: $(Build.SourcesDirectory)
+     recursion: True
+     VersionNumber: $(Build.BuildNumber)
+     useBuildNumberDirectly: False
+     VersionRegex: \d+\.\d+\.\d+\.\d+
+     versionForJSONFileFormat: {1}.{2}.{3}
+     FilenamePattern: package.json
+     OutputVersion: OutputedVersion
+
 - script: vsce package
   displayName: 'Generate .vsix'
 
@@ -36,19 +50,6 @@ steps:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: vscode-inf
 
-# Version JSON File
-# Description - Applies a version to a named field in a JSON File
-- task: VersionJSONFile
-  inputs: 
-     # Required arguments
-     Path: $(Build.SourcesDirectory)
-     recursion: True
-     VersionNumber: $(Build.BuildNumber)
-     useBuildNumberDirectly: False
-     VersionRegex: \d+\.\d+\.\d+\.\d+
-     versionForJSONFileFormat: {1}.{2}.{3}
-     FilenamePattern: package.json
-     OutputVersion: OutputedVersion
      
 # - task: GithubRelease@0 
 #   displayName: 'Create GitHub Release'      

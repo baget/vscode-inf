@@ -30,7 +30,7 @@ steps:
      VersionNumber: $(Build.BuildNumber)
      useBuildNumberDirectly: False
      VersionRegex: \d+\.\d+\.\d+\.\d+
-     versionForJSONFileFormat: {1}.{2}.{3}
+     versionForJSONFileFormat: '{1}.{2}.{3}'
      FilenamePattern: package.json
      OutputVersion: OutputedVersion
 

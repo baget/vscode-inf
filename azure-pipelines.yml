@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  version: '0.0.1'
+
 trigger:
 - master
 
@@ -20,19 +23,11 @@ steps:
 - script: npm install -g vsce
   displayName: 'Install vsce'
 
-# Version JSON File
-# Description - Applies a version to a named field in a JSON File
-# - task: VersionJSONFile@1
-  # inputs: 
-  #    # Required arguments
-  #    Path: $(Build.SourcesDirectory)
-  #    recursion: True
-  #    VersionNumber: $(Build.BuildNumber)
-  #    useBuildNumberDirectly: False
-  #    VersionRegex: \d+\.\d+\.\d+\.\d+
-  #    versionForJSONFileFormat: '{1}.{2}.{3}'
-  #    FilenamePattern: package.json
-  #    OutputVersion: OutputedVersion
+- script: npm install -g json
+  displayName: 'Install vsce'
+
+- script: echo json -I -f package.json -e 'this.version="$(version)"'
+  displayName: 'Update version'
 
 - script: vsce package
   displayName: 'Generate .vsix'
@@ -46,16 +41,4 @@ steps:
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: vscode-inf
-
      
-# - task: GithubRelease@0 
-#   displayName: 'Create GitHub Release'      
-#   #condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/release-v')
-#   inputs:
-#     gitHubConnection: baget
-#     repositoryName: baget/vscode-inf    
-#     tagSource: manual
-#     tag: $(Build.BuildNumber)
-#     title: vscode-inf v$(Build.BuildNumber)
-#     assets: |
-#          $(Build.ArtifactStagingDirectory)/*.vsix

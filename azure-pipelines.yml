@@ -23,16 +23,16 @@ steps:
 # Version JSON File
 # Description - Applies a version to a named field in a JSON File
 - task: VersionJSONFile@1
-  inputs: 
-     # Required arguments
-     Path: $(Build.SourcesDirectory)
-     recursion: True
-     VersionNumber: $(Build.BuildNumber)
-     useBuildNumberDirectly: False
-     VersionRegex: \d+\.\d+\.\d+\.\d+
-     versionForJSONFileFormat: '{1}.{2}.{3}'
-     FilenamePattern: package.json
-     OutputVersion: OutputedVersion
+  # inputs: 
+  #    # Required arguments
+  #    Path: $(Build.SourcesDirectory)
+  #    recursion: True
+  #    VersionNumber: $(Build.BuildNumber)
+  #    useBuildNumberDirectly: False
+  #    VersionRegex: \d+\.\d+\.\d+\.\d+
+  #    versionForJSONFileFormat: '{1}.{2}.{3}'
+  #    FilenamePattern: package.json
+  #    OutputVersion: OutputedVersion
 
 - script: vsce package
   displayName: 'Generate .vsix'

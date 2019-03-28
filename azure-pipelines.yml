@@ -3,8 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-variables:
-  version: '0.0.1'
+# variables:
+#   version: '0.0.1'
 
 trigger:
 - master
@@ -24,7 +24,7 @@ steps:
   displayName: 'Install vsce'
 
 - script: npm install -g json
-  displayName: 'Install vsce'
+  displayName: 'Install json'
 
 - script: json -I -f package.json -e 'this.version="$(version)"'
   displayName: 'Update version'
